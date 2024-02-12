@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        @font-face {
+            font-family: 'Crunch Chips';
+            src: url('file:///C:/Users/an/Documents/fuente/Crunch Chips.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Jojoba';
+            src: url('file:///C:/Users/an/Documents/fuente2/jojoba.otf') format('opentype');
+        }
+
+        body {
+            font-family: 'Jojoba', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #f9e0e3; /* Rosa pastel */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Oculta el desbordamiento del contenido */
+            animation: moveBackground 10s infinite alternate; /* Animación del fondo */
+        }
+        @keyframes moveBackground {
+            0% {
+                background-position: 0 0; /* Posición inicial del fondo */
+            }
+            100% {
+                background-position: 0 100%; /* Posición final del fondo */
+            }
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            overflow: hidden; /* Para evitar que los corazones floten fuera del contenedor */
+        }
+        h1 {
+            font-family: 'Crunch Chips', cursive;
+            color: #ff7aa3; /* Rosa oscuro */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative; /* Para que los corazones se muevan encima del texto */
+        }
+        .heart {
+            color: #ff7aa3; /* Rosa oscuro */
+        }
+        p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-family: 'Jojoba', cursive;
+            display: none; /* Oculta el párrafo inicialmente */
+        }
+        #mensaje-img {
+            display: block; /* Muestra la imagen inicialmente */
+            width: 200px; /* Ajusta el ancho de la imagen */
+            height: auto; /* Mantiene la proporción de aspecto */
+            margin: 20px auto; /* Ajusta los márgenes superior e inferior para centrar verticalmente */
+        }
+        #mensaje-texto {
+            display: none; /* Oculta el mensaje de texto inicialmente */
+        }
+        .cat-image {
+            border-radius: 50%;
+            border: 5px solid #ff7aa3; /* Rosa oscuro */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ff7aa3; /* Rosa oscuro */
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 15px 30px;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            font-family: 'Jojoba', cursive;
+            overflow: hidden; /* Oculta el desbordamiento del contenido */
+            position: relative; /* Añadido para el efecto de onda */
+            z-index: 1; /* Asegura que el botón esté sobre el efecto de onda */
+        }
+        button:hover {
+            background-color: #ff5983; /* Rosa más claro */
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .button-ripple {
+            background: rgba(255, 255, 255, 0.4); /* Color del efecto de onda */
+            border-radius: 50%;
+            position: absolute;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        .heart-svg {
+            width: 50px; /* Ancho del corazón SVG */
+            fill: #ff7aa3; /* Color del corazón */
+            position: absolute;
+            animation: heart-float 4s linear infinite, heart-fade 2s ease-in-out infinite alternate;
+            pointer-events: none; /* Para evitar que los corazones interfieran con el clic del botón */
+        }
+        @keyframes heart-float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+        @keyframes heart-fade {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>¿Quieres ser mi <span class="heart">San Valentín</span>?</h1>
+    <img id="mensaje-img" class="cat-image" src="file:///C:/Users/an/Downloads/201e18f0292c0c6163f477784fb84939.jpg" alt="Tu imagen">
+    <p id="mensaje-texto">Ya verás que la pasaremos bien bonito ese día comiendo mostrito y también en mi jato, loviuu ♡
+(sí, pa esta wbda me demoré espero te guste al menos:v)</p>
+    <button onclick="respuesta()">¡Chi, obviamente!</button>
+    <p id="respuesta" style="display: none;"></p>
+    <!-- Corazones flotantes -->
+    <svg class="heart-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+</div>
+
+<script>
+    function respuesta() {
+        const respuestaElement = document.getElementById('respuesta');
+        respuestaElement.style.display = 'block';
+        
+        const mensajeImg = document.getElementById('mensaje-img');
+        mensajeImg.style.display = 'none'; // Oculta la imagen
+        const mensajeTexto = document.getElementById('mensaje-texto');
+        mensajeTexto.style.display = 'block'; // Muestra el texto
+    }
+</script>
+
+</body>
+</html>
